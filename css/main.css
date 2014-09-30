@@ -1,23 +1,59 @@
+@font-face {
+  font-family: "Clear Sans";
+  src: url("/fonts/ClearSans-Bold.ttf");
+}
+
 body {
-  background: #EEF0F0;
-  font-color: black;
-  font-family: "Lucida Console", Monaco, monospace;
+  background: #efeff2;
+  font-family: "Clear Sans";
   position: relative;
   width: 100%;
   display: block;
+}
+
+h1 {
+  color: #a69eb0;
+  font-size: 100px;
+}
+
+.board {
+  text-align: center;
+  border-width: 20px;
+  margin: 0 auto;
+
 
 }
 
+
 .cell {
-  background: #74A259;
+  /*background: rgba(238, 238, 218, 0.35);*/
+  background: #797980;
+  color: #eeeeee;
   float: left;
   width: 25%;
   height: 150px;
-  border: 1px solid black;
+  border: solid #dadae3;
+  font-size: 60px;
+  border-radius: 10px;
 
 }
 
-div {
+.cell div {
+  margin-top: 28px;
+}
+
+
+blockquote {
+  display: inline-block;
+}
+
+/*div {
   margin-right: auto;
   margin-left: auto;
 }
+*/
+
+
+
+
+
