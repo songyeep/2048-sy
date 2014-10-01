@@ -1,3 +1,5 @@
+#random, library functions
+
 randomInt = (x) ->
   Math.floor(Math.random() * x)
 
@@ -8,9 +10,15 @@ randomValue = ->
   values = [2, 2, 2, 4]
   values[randomInt(4)]
 
+
+
+
+
+
 buildBoard = ->
   [0..3].map -> ([0..3].map -> 0)
 
+#note: recursive function
 generateTile = (board) ->
   value = 2
   [row, column] = randomCellIndices()
@@ -19,6 +27,17 @@ generateTile = (board) ->
     board[row][column] = value
   else
     generateTile(board)
+
+noZero = (value) ->
+  if value == 0 then "" else value
+
+
+showBoard = (board) ->
+  for row in [0..3]
+    for column in [0..3]
+      $(".r#{row}.c#{column} > div").html(noZero(board[row][column]))
+
+
 
 printArray = (array) ->
   console.log "-- Start -- "
@@ -31,3 +50,4 @@ $ ->
   generateTile(newBoard)
   generateTile(newBoard)
   printArray(newBoard)
+  showBoard(newBoard)
