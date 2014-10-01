@@ -4,12 +4,21 @@ randomInt = (x) ->
 randomCellIndices = ->
   [randomInt(4), randomInt(4)]
 
+randomValue = ->
+  values = [2, 2, 2, 4]
+  values[randomInt(4)]
+
 buildBoard = ->
   [0..3].map -> ([0..3].map -> 0)
 
-generateTile = ->
+generateTile = (board) ->
   value = 2
-  console.log randomCellIndices()
+  [row, column] = randomCellIndices()
+  # console.log "row: #{row}/ col: #{column}}"
+  if board[row][column] == 0
+    board[row][column] = value
+  else
+    generateTile(board)
 
 printArray = (array) ->
   console.log "-- Start -- "
@@ -19,6 +28,6 @@ printArray = (array) ->
 
 $ ->
   newBoard = buildBoard()
+  generateTile(newBoard)
+  generateTile(newBoard)
   printArray(newBoard)
-  generateTile()
-  generateTile()
