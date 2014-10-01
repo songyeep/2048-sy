@@ -1,9 +1,15 @@
+randomInt = (x) ->
+  Math.floor(Math.random() * x)
+
+randomCellIndices = ->
+  [randomInt(4), randomInt(4)]
+
 buildBoard = ->
   [0..3].map -> ([0..3].map -> 0)
 
-
 generateTile = ->
-  console.log "generate tile"
+  value = 2
+  console.log randomCellIndices()
 
 printArray = (array) ->
   console.log "-- Start -- "
