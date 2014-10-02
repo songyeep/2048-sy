@@ -33,8 +33,9 @@ move =(board, direction) ->
   for i in [0..3]
     if direction is 'right'
       row = getRow(i, board)
-      mergeCells(row, direction)
-      collapseCells()
+      row = mergeCells(row, direction)
+      row = collapseCells(row, direction)
+      console.log row
 
 
 #pass by reference (for array) - we need to create a new board, we need a clone
@@ -44,23 +45,28 @@ getRow = (r, b) ->
   # the original @board
 
 
-mergeCells = (r, direction) ->
+mergeCells = (row, direction) ->
   if direction is 'right'
     for a in [3...0]
       for b in [a-1..0]
-        if r[a] is 0 then break
-        else if r[a] == r[b]
-          r[a] *= 2
-          r[b] = 0
+        if row[a] is 0 then break
+        else if row[a] == row[b]
+          row[a] *= 2
+          row[b] = 0
           break
-        else if r[b] isnt 0 then break
+        else if row[b] isnt 0 then break
 
-  r
-console.log mergeCells [0,2,2,0], 'right'
+  row
 
-collapseCells = ->
-  ""
+collapseCells = (row, direction) ->
+  row = row.filter (x) -> x isnt 0
 
+  if direction is "right"
+    while row.length < 4
+      row.unshift 0
+    row
+
+# console.log collapseCells [2,2,0,0], "right"
 
 
 showValue = (value) ->
