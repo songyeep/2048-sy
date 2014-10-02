@@ -33,7 +33,7 @@ h1 {
   color: #eeeeee;
   float: left;
   width: 25%;
-  height: 150px;
+  height: 120px;
   border: solid #dadae3;
   font-size: 60px;
   border-radius: 10px;
@@ -41,7 +41,7 @@ h1 {
 }
 
 .cell div {
-  margin-top: 35px;
+  margin-top: 20px;
 }
 
 
