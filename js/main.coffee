@@ -43,19 +43,23 @@ getRow = (r, b) ->
   # takes the arguments row and board. these are cloned rows and boards that do not change
   # the original @board
 
-mergeCells = (r, d) ->
+
+mergeCells = (r, direction) ->
   if direction is 'right'
     for a in [3...0]
       for b in [a-1..0]
-        r[a] == r[b]
+        if r[a] is 0 then break
+        else if r[a] == r[b]
+          r[a] *= 2
+          r[b] = 0
+          break
+        else if r[b] isnt 0 then break
 
-
-# takes the arguments row and direction
-
-  console.log "merge cells"
+  r
+console.log mergeCells [0,2,2,0], 'right'
 
 collapseCells = ->
-  console.log "collapse cells"
+  ""
 
 
 
