@@ -29,21 +29,25 @@ generateTile = (board) ->
     generateTile(board)
 
 move =(board, direction) ->
+  newBoard = buildBoard()
 
   for i in [0..3]
     if direction is "right" #or "left"
       row = getRow(i, board)
       row = mergeCells(row, direction)
       row = collapseCells(row, direction)
-      console.log row
-
-
+      setRow(row, i, newBoard)
+  printArray newBoard
+  newBoard
 #pass by reference (for array) - we need to create a new board, we need a clone
 getRow = (r, b) ->
   [b[r][0], b[r][1], b[r][2], b[r][3]]
   # takes the arguments row and board. these are cloned rows and boards that do not change
   # the original @board
 
+
+setRow = (row, index, board) ->
+  board[index] = row
 
 mergeCells = (row, direction) ->
   if direction is "right"
@@ -90,7 +94,6 @@ showBoard = (board) ->
       $(".r#{row}.c#{column} > div").html(showValue(board[row][column]))
 
 
-
 printArray = (array) ->
   console.log "-- Start -- "
   for row in array
@@ -119,12 +122,9 @@ $ ->
         when 40 then 'down'
 
       #try moving
-
       move(@board, direction)
-
-
-      #check the move validity
-
+      #check the move validity,
+      # by comparing the original and new board
 
     else
       # do nothing
