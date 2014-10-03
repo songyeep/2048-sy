@@ -9,17 +9,25 @@ body {
   position: relative;
   width: 100%;
   display: block;
+  text-align: center;
+
+
 }
 
 h1 {
   color: #a69eb0;
   font-size: 100px;
+
 }
 
 .board {
+  background: #bbada0;
   text-align: center;
   border-width: 20px;
   margin: 0 auto;
+  padding: 8px;
+  width: 472px;
+  height: 472px;
 }
 
 .instructions {
@@ -27,21 +35,22 @@ h1 {
 }
 
 
+
 .cell {
   /*background: rgba(238, 238, 218, 0.35);*/
   background: #797980;
+  border-radius: 10px;
+  border: solid #dadae3;
   color: #eeeeee;
   float: left;
-  width: 25%;
-  height: 120px;
-  border: solid #dadae3;
-  font-size: 60px;
-  border-radius: 10px;
-
+  font-size: 50px;
+  margin: 7px;
+  width: 100px;
+  height: 100px;
 }
 
 .cell div {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 
@@ -50,12 +59,11 @@ blockquote {
 }
 
 /*div {
-  margin-right: auto;
-  margin-left: auto;
+  display: block;
 }
+
+
 */
-
-
 
 
 

@@ -47,8 +47,12 @@ getRow = (r, b) ->
 setRow = (row, index, board) ->
   board[index] = row
 
+
+
+
 mergeCells = (row, direction) ->
-  if direction is "right"
+
+  merge = (row) ->
     for a in [3...0]
       for b in [a-1..0]
         if row[a] is 0 then break
@@ -57,18 +61,13 @@ mergeCells = (row, direction) ->
           row[b] = 0
           break
         else if row[b] isnt 0 then break
+    row
 
-  # left
-
+  if direction is "right"
+    row = merge(row)
   else if direction is "left"
-    for a in [0...3]
-      for b in [a+1..3]
-        if row[a] is 0 then break
-        else if row[a] == row[b]
-          row[a] *= 2
-          row[b] = 0
-          break
-        else if row[b] isnt 0 then break
+    row = merge(row.reverse()).reverse()
+
   row
 
 collapseCells = (row, direction) ->
@@ -102,30 +101,24 @@ boardIsFull = (board) ->
   true
 
 noValidMove = (board) ->
-  direction = 'right' #FIXME, do the same for other directions
+  direction = 'right' or 'left'
   newBoard = move(board, direction)
   if moveIsValid(board, newBoard)
     return false
   true
 
-# left
-  direction = 'left'
-  newBoard = move(board, direction)
-  if moveIsValid(board, newBoard)
-    return false
-  true
 
 isGameOver = (board) ->
   boardIsFull(board) and noValidMove(board)
-
-showValue = (value) ->
-  if value is 0 then "" else value
 
 
 showBoard = (board) ->
   for row in [0..3]
     for column in [0..3]
-      $(".r#{row}.c#{column} > div").html(showValue(board[row][column]))
+      if board[row][column] is 0
+        $(".r#{row}.c#{column} > div").html("")
+      else
+        $(".r#{row}.c#{column} > div").html(board[row][column])
 
 
 printArray = (array) ->
@@ -174,7 +167,7 @@ $ ->
 
          #check whether gameover
         if isGameOver(@board)
-          console.log "You lose"
+          alert "YOU SUCK"
       else
         console.log "invalid"
 
