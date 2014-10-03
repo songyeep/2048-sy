@@ -135,6 +135,9 @@ $ ->
 
       if moveIsValid(@board, newBoard)
         console.log "valid"
+        @board = newBoard
+        generateTile(@board)
+        showBoard(@board)
       else
         console.log "invalid"
 
