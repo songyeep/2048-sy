@@ -27,15 +27,20 @@ generateTile = (board) ->
   else
     generateTile(board)
 
-move =(board, direction) ->
+move = (board, direction) ->
   newBoard = buildBoard()
-
   for i in [0..3]
-    if direction is "right" or "left"
+    if direction is "right" or direction is "left"
       row = getRow(i, board)
       row = mergeCells(row, direction)
       row = collapseCells(row, direction)
       setRow(row, i, newBoard)
+    else if direction is "up" or direction is "down"
+      column = getColumn(i, board)
+      column = mergeCells(column, direction)
+      column = collapseCells(column, direction)
+      setColumn(column, i, newBoard)
+
   newBoard
 #pass by reference (for array) - we need to create a new board, we need a clone
 getRow = (r, b) ->
@@ -43,47 +48,49 @@ getRow = (r, b) ->
   # takes the arguments row and board. these are cloned rows and boards that do not change
   # the original @board
 
+getColumn = (c, b) ->
+  [b[0][c], b[1][c], b[2][c], b[3][c]]
 
 setRow = (row, index, board) ->
   board[index] = row
 
+setColumn = (column, index, board) ->
+  for i in [0..3]
+    board[i][index] = column[i]
 
+mergeCells = (cells, direction) ->
 
-
-mergeCells = (row, direction) ->
-
-  merge = (row) ->
+  merge = (cells) ->
     for a in [3...0]
       for b in [a-1..0]
-        if row[a] is 0 then break
-        else if row[a] == row[b]
-          row[a] *= 2
-          row[b] = 0
+        if cells[a] is 0 then break
+        else if cells[a] == cells[b]
+          cells[a] *= 2
+          cells[b] = 0
           break
-        else if row[b] isnt 0 then break
-    row
+        else if cells[b] isnt 0 then break
+    cells
 
-  if direction is "right"
-    row = merge(row)
-  else if direction is "left"
-    row = merge(row.reverse()).reverse()
 
-  row
+  if direction is "right" or direction is "down"
+    cells = merge(cells)
+  else if direction is "left" or direction is "up"
+    cells = merge(cells.reverse()).reverse()
 
-collapseCells = (row, direction) ->
-  row = row.filter (x) -> x isnt 0
+  cells
 
-  if direction is "right"
-    while row.length < 4
-      row.unshift 0
+collapseCells = (cells, direction) ->
+  cells = cells.filter (x) -> x isnt 0
 
-  # left
+  if direction is "right" or direction is "down"
+    while cells.length < 4
+      cells.unshift 0
 
-  else if direction is "left"
-    while row.length < 4
-      row.push 0
+  else if direction is "left" or direction is "up"
+    while cells.length < 4
+      cells.push 0
 
-  row
+  cells
 
 
 moveIsValid = (originalBoard, newBoard) ->
@@ -101,7 +108,7 @@ boardIsFull = (board) ->
   true
 
 noValidMove = (board) ->
-  direction = 'right' or 'left'
+  direction = 'right' or 'left' or 'down' or 'up'
   newBoard = move(board, direction)
   if moveIsValid(board, newBoard)
     return false
@@ -173,19 +180,4 @@ $ ->
 
     else
       # do nothing
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
