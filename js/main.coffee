@@ -89,6 +89,22 @@ moveIsValid = (originalBoard, newBoard) ->
         return true
   false
 
+boardIsFull = (board) ->
+  for row in board
+    if 0 in row
+      return false
+  true
+
+noValidMove = (board) ->
+  direction = 'right' #FIXME, do the same for other directions
+  newBoard = move(board, direction)
+  if moveIsValid(board, newBoard)
+    return false
+  true
+
+isGameOver = (board) ->
+  boardIsFull(board) and noValidMove(board)
+
 showValue = (value) ->
   if value is 0 then "" else value
 
@@ -136,8 +152,13 @@ $ ->
       if moveIsValid(@board, newBoard)
         console.log "valid"
         @board = newBoard
+        #generate tile
         generateTile(@board)
+        #show board
         showBoard(@board)
+        #check whether gameover
+        if isGameOver(@board)
+          console.log "You lose"
       else
         console.log "invalid"
 
