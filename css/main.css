@@ -43,14 +43,14 @@ h1 {
   border: solid #dadae3;
   color: #eeeeee;
   float: left;
-  font-size: 50px;
+  font-size: 30px;
   margin: 7px;
   width: 100px;
   height: 100px;
 }
 
 .cell div {
-  margin-top: 15px;
+  margin-top: 28px;
 }
 
 

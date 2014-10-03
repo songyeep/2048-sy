@@ -30,12 +30,12 @@ generateTile = (board) ->
 move = (board, direction) ->
   newBoard = buildBoard()
   for i in [0..3]
-    if direction is "right" or direction is "left"
+    if direction in ["right", "left"]
       row = getRow(i, board)
       row = mergeCells(row, direction)
       row = collapseCells(row, direction)
       setRow(row, i, newBoard)
-    else if direction is "up" or direction is "down"
+    else if direction in ["up", "down"]
       column = getColumn(i, board)
       column = mergeCells(column, direction)
       column = collapseCells(column, direction)
@@ -72,9 +72,9 @@ mergeCells = (cells, direction) ->
     cells
 
 
-  if direction is "right" or direction is "down"
+  if direction in ["right", "down"]
     cells = merge(cells)
-  else if direction is "left" or direction is "up"
+  else if direction in ["left", "up"]
     cells = merge(cells.reverse()).reverse()
 
   cells
@@ -82,11 +82,11 @@ mergeCells = (cells, direction) ->
 collapseCells = (cells, direction) ->
   cells = cells.filter (x) -> x isnt 0
 
-  if direction is "right" or direction is "down"
+  if direction in ["right", "down"]
     while cells.length < 4
       cells.unshift 0
 
-  else if direction is "left" or direction is "up"
+  else if direction in ["left", "up"]
     while cells.length < 4
       cells.push 0
 
