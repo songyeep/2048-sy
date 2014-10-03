@@ -37,7 +37,6 @@ move =(board, direction) ->
       row = mergeCells(row, direction)
       row = collapseCells(row, direction)
       setRow(row, i, newBoard)
-    printArray newBoard
   newBoard
 #pass by reference (for array) - we need to create a new board, we need a clone
 getRow = (r, b) ->
@@ -128,15 +127,16 @@ $ ->
         when 40 then 'down'
 
       #try moving
-      move(@board, direction)
+      newBoard = move(@board, direction)
       #check the move validity,
       # by comparing the original and new board
+
       printArray newBoard
 
       if moveIsValid(@board, newBoard)
         console.log "valid"
       else
-        console.log "<invalid></invalid>"
+        console.log "invalid"
 
     else
       # do nothing
