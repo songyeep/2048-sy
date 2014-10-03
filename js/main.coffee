@@ -31,7 +31,7 @@ move =(board, direction) ->
   newBoard = buildBoard()
 
   for i in [0..3]
-    if direction is "right" #or "left"
+    if direction is "right" or "left"
       row = getRow(i, board)
       row = mergeCells(row, direction)
       row = collapseCells(row, direction)
@@ -57,15 +57,18 @@ mergeCells = (row, direction) ->
           row[b] = 0
           break
         else if row[b] isnt 0 then break
-  # else if direction is "left"
-  #   for a in [0...3]
-  #     for b in [a+1..0]
-  #       if row[b] is 0 then break
-  #       else if row[a] == row[b]
-  #         row[a] *= 2
-  #         row[b] = 0
-  #         break
-  #       else if row[a] isnt 0 then break
+
+  # left
+
+  else if direction is "left"
+    for a in [0...3]
+      for b in [a+1..3]
+        if row[a] is 0 then break
+        else if row[a] == row[b]
+          row[a] *= 2
+          row[b] = 0
+          break
+        else if row[b] isnt 0 then break
   row
 
 collapseCells = (row, direction) ->
@@ -74,9 +77,13 @@ collapseCells = (row, direction) ->
   if direction is "right"
     while row.length < 4
       row.unshift 0
-  # else if direction is "left"
-  #   while row.length < 4
-  #     row.push 0
+
+  # left
+
+  else if direction is "left"
+    while row.length < 4
+      row.push 0
+
   row
 
 
@@ -96,6 +103,13 @@ boardIsFull = (board) ->
 
 noValidMove = (board) ->
   direction = 'right' #FIXME, do the same for other directions
+  newBoard = move(board, direction)
+  if moveIsValid(board, newBoard)
+    return false
+  true
+
+# left
+  direction = 'left'
   newBoard = move(board, direction)
   if moveIsValid(board, newBoard)
     return false
