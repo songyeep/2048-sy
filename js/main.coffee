@@ -12,7 +12,6 @@ randomValue = ->
 
 
 
-
 #game functions
 
 buildBoard = ->
@@ -152,11 +151,14 @@ $ ->
       if moveIsValid(@board, newBoard)
         console.log "valid"
         @board = newBoard
+
         #generate tile
         generateTile(@board)
+
         #show board
         showBoard(@board)
-        #check whether gameover
+
+         #check whether gameover
         if isGameOver(@board)
           console.log "You lose"
       else
