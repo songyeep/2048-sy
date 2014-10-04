@@ -9,61 +9,88 @@ body {
   position: relative;
   width: 100%;
   display: block;
-  text-align: center;
-
-
 }
 
 h1 {
-  color: #a69eb0;
-  font-size: 100px;
+  color: #797980;
+  font-size: 80px;
 
+  float: left;
+  margin: 0;
+
+
+}
+
+.container {
+  width: 500px;
 }
 
 .board {
-  background: #A9B690;
   text-align: center;
-  border-width: 20px;
-  margin: 0 auto;
+  background: #96B690;
+  border-radius: 10px;
+  margin-top: 20px;
+  position: relative;
   padding: 8px;
-  width: 472px;
-  height: 472px;
+  cursor: default;
+  height: 500px;
+
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+
+}
+
+.above-game {
+  content: "";
+  display: block;
+  clear: both;
+  font-size: 18px;
 }
 
 .instructions {
-  font-size: 20px;
+  float: left;
+  margin-bottom: 10px;
 }
 
+}
 
+.btn {
+  float: right;
+}
 
 .cell {
-  /*background: rgba(238, 238, 218, 0.35);*/
   background: #797980;
   border-radius: 10px;
   border: solid #dadae3;
   color: #eeeeee;
-  float: left;
+
   font-size: 30px;
-  margin: 7px;
-  width: 100px;
-  height: 100px;
+  margin: 8.5px;
+
+
+  float: left;
+  width: 21.18644%;
+  height: 21.18644%;
+
+
+
 }
 
 .cell div {
-  margin-top: 28px;
+  margin-top: 25px;
 }
 
 
-blockquote {
-  display: inline-block;
-}
-
-/*div {
+div {
   display: block;
+
 }
 
 
-*/
+
 
 
 

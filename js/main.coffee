@@ -19,9 +19,8 @@ buildBoard = ->
 
 #note: recursive function
 generateTile = (board) ->
-  value = 2
+  value = randomValue()
   [row, column] = randomCellIndices()
-  # console.log "row: #{row}/ col: #{column}}"
   if board[row][column] == 0
     board[row][column] = value
   else
@@ -42,11 +41,10 @@ move = (board, direction) ->
       setColumn(column, i, newBoard)
 
   newBoard
+
 #pass by reference (for array) - we need to create a new board, we need a clone
 getRow = (r, b) ->
   [b[r][0], b[r][1], b[r][2], b[r][3]]
-  # takes the arguments row and board. these are cloned rows and boards that do not change
-  # the original @board
 
 getColumn = (c, b) ->
   [b[0][c], b[1][c], b[2][c], b[3][c]]
@@ -58,39 +56,37 @@ setColumn = (column, index, board) ->
   for i in [0..3]
     board[i][index] = column[i]
 
-mergeCells = (cells, direction) ->
+mergeCells = (cell, direction) ->
 
-  merge = (cells) ->
+  merge = (cell) ->
     for a in [3...0]
       for b in [a-1..0]
-        if cells[a] is 0 then break
-        else if cells[a] == cells[b]
-          cells[a] *= 2
-          cells[b] = 0
+        if cell[a] is 0 then break
+        else if cell[a] == cell[b]
+          cell[a] *= 2
+          cell[b] = 0
           break
-        else if cells[b] isnt 0 then break
-    cells
-
-
-  if direction in ["right", "down"]
-    cells = merge(cells)
-  else if direction in ["left", "up"]
-    cells = merge(cells.reverse()).reverse()
-
-  cells
-
-collapseCells = (cells, direction) ->
-  cells = cells.filter (x) -> x isnt 0
+        else if cell[b] isnt 0 then break
+    cell
 
   if direction in ["right", "down"]
-    while cells.length < 4
-      cells.unshift 0
-
+    cell = merge(cell)
   else if direction in ["left", "up"]
-    while cells.length < 4
-      cells.push 0
+    cell = merge(cell.reverse()).reverse()
 
-  cells
+  cell
+
+
+collapseCells = (cell, direction) ->
+  cell = cell.filter (x) -> x isnt 0
+
+  while cell.length < 4
+    if direction in ["right", "down"]
+      cell.unshift 0
+    else if direction in ["left", "up"]
+      cell.push 0
+
+  cell
 
 
 moveIsValid = (originalBoard, newBoard) ->
@@ -108,10 +104,10 @@ boardIsFull = (board) ->
   true
 
 noValidMove = (board) ->
-  direction = 'right' or 'left' or 'down' or 'up'
-  newBoard = move(board, direction)
-  if moveIsValid(board, newBoard)
-    return false
+  for direction in ['right', 'left', 'down', 'up']
+    newBoard = move(board, direction)
+    if moveIsValid(board, newBoard)
+      return false
   true
 
 
@@ -180,4 +176,53 @@ $ ->
 
     else
       # do nothing
+
+
+
+  $("#startNewGame").click () =>
+    @board = buildBoard()
+    generateTile(@board)
+    generateTile(@board)
+    printArray(@board)
+    showBoard(@board)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
