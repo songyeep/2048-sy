@@ -11,7 +11,6 @@ randomValue = ->
   values[randomInt(4)]
 
 
-
 #game functions
 
 buildBoard = ->
@@ -110,7 +109,6 @@ noValidMove = (board) ->
       return false
   true
 
-
 isGameOver = (board) ->
   boardIsFull(board) and noValidMove(board)
 
@@ -118,10 +116,15 @@ isGameOver = (board) ->
 showBoard = (board) ->
   for row in [0..3]
     for column in [0..3]
-      if board[row][column] is 0
-        $(".r#{row}.c#{column} > div").html("")
-      else
-        $(".r#{row}.c#{column} > div").html(board[row][column])
+      switch board[row][column]
+        when 0 then $(".r#{row}.c#{column} > div").html("").css("background", "#797980")
+        when 2 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#333366")
+        when 4 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#663333")
+        when 8 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#336633")
+        when 16 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#B0700E")
+        when 32 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#d2ea13")
+        when 64 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#64bbd4")
+
 
 
 printArray = (array) ->
@@ -129,6 +132,8 @@ printArray = (array) ->
   for row in array
     console.log row
   console.log "-- End --"
+
+
 
 $ ->
   @board = buildBoard()
@@ -178,18 +183,12 @@ $ ->
       # do nothing
 
 
-
   $("#startNewGame").click () =>
     @board = buildBoard()
     generateTile(@board)
     generateTile(@board)
     printArray(@board)
     showBoard(@board)
-
-
-
-
-
 
 
 
