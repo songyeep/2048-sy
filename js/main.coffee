@@ -7,8 +7,8 @@ randomCellIndices = ->
   [randomInt(4), randomInt(4)]
 
 randomValue = ->
-  values = ["x", "x", "x", 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4]
-  values[randomInt(15)]
+  values = ["x", 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4]
+  values[randomInt(30)]
 # x for explode tile
 
 
@@ -217,35 +217,6 @@ $ ->
     generateTile(@board)
     printArray(@board)
     showBoard(@board)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
