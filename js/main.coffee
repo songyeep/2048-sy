@@ -11,6 +11,7 @@ randomValue = ->
   values[randomInt(4)]
 
 
+
 #game functions
 
 buildBoard = ->
@@ -131,7 +132,6 @@ showBoard = (board) ->
         when 2048 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#ffffff") #white
 
 
-
 printArray = (array) ->
   console.log "-- Start -- "
   for row in array
@@ -147,7 +147,9 @@ $ ->
   printArray(@board)
   showBoard(@board)
 
-  $(".board").fadeIn(5000)
+  $("body").hide()
+  $("body").fadeIn(1000)
+
 
   $("body").keydown (e) =>
 
@@ -182,7 +184,7 @@ $ ->
 
          #check whether gameover
         if isGameOver(@board)
-          alert "YOU SUCK"
+          alert "Game over, dude"
       else
         console.log "invalid"
 
