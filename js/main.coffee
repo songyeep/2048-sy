@@ -26,6 +26,7 @@ generateTile = (board) ->
   else
     generateTile(board)
 
+
 move = (board, direction) ->
   newBoard = buildBoard()
   for i in [0..3]
@@ -69,16 +70,23 @@ mergeCells = (cell, direction) ->
           if cell[b] > 0
             cell[a] = 0
             cell[b] = 0
+            $(".bomb_audio").trigger("play");
+
             break
+
           else if cell[a] == cell[b] == "x"
             cell[a] = 0
             cell[b] = 0
+            $(".bomb_audio").trigger("play");
+
             break
 
         else if cell[b] == "x"
           if cell[a] > 0
             cell[a] = 0
             cell[b] = 0
+            $(".bomb_audio").trigger("play");
+
             break
 
         else if cell[b] isnt 0 then break
@@ -159,10 +167,13 @@ printArray = (array) ->
   console.log "-- End --"
 
 
+
+
 $ ->
   @board = buildBoard()
   generateTile(@board)
   generateTile(@board)
+
   printArray(@board)
   showBoard(@board)
 
