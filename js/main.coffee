@@ -147,7 +147,7 @@ showBoard = (board) ->
       if board[row][column] == 0
         $(".r#{row}.c#{column} > div").html("").css("background", "#797980") #background color
       else if board[row][column] == 'x'
-        $(".r#{row}.c#{column} > div").html('<img src="/img/bomb.jpeg" class="bomb-pic">')
+        $(".r#{row}.c#{column} > div").html('<img src="/img/BOMB-620_1611903a.png" class="bomb-pic">')
       else
         $(".r#{row}.c#{column} > div").html(board[row][column])
 
