@@ -117,13 +117,18 @@ showBoard = (board) ->
   for row in [0..3]
     for column in [0..3]
       switch board[row][column]
-        when 0 then $(".r#{row}.c#{column} > div").html("").css("background", "#797980")
-        when 2 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#333366")
-        when 4 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#663333")
-        when 8 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#336633")
-        when 16 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#B0700E")
-        when 32 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#d2ea13")
-        when 64 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#64bbd4")
+        when 0 then $(".r#{row}.c#{column} > div").html("").css("background", "#797980") #background color
+        when 2 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#333366") #dark blue
+        when 4 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#663333") #dark red
+        when 8 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#336633") #dark green
+        when 16 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#B0700E") #orange
+        when 32 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#d2ea13") #yellow
+        when 64 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#64bbd4") #light blue
+        when 128 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#ea50d4") #pink
+        when 256 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#f21b10") #red
+        when 512 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#54565c") #gray
+        when 1024 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#000000") #black
+        when 2048 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#ffffff") #white
 
 
 
@@ -141,6 +146,8 @@ $ ->
   generateTile(@board)
   printArray(@board)
   showBoard(@board)
+
+  $(".board").fadeIn(5000)
 
   $("body").keydown (e) =>
 
