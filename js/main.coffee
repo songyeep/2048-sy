@@ -7,9 +7,9 @@ randomCellIndices = ->
   [randomInt(4), randomInt(4)]
 
 randomValue = ->
-  values = [2, 2, 2, 4]
-  values[randomInt(4)]
-
+  values = ["x", "x", "x", 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4]
+  values[randomInt(15)]
+# x for explode tile
 
 
 #game functions
@@ -61,12 +61,28 @@ mergeCells = (cell, direction) ->
   merge = (cell) ->
     for a in [3...0]
       for b in [a-1..0]
-        if cell[a] is 0 then break
-        else if cell[a] == cell[b]
+        if (cell[a] == cell[b]) and (cell[a] isnt "x")
           cell[a] *= 2
           cell[b] = 0
-          break
+
+        else if cell[a] == "x"
+          if cell[b] > 0
+            cell[a] = 0
+            cell[b] = 0
+            break
+          else if cell[a] == cell[b] == "x"
+            cell[a] = 0
+            cell[b] = 0
+            break
+
+        else if cell[b] == "x"
+          if cell[a] > 0
+            cell[a] = 0
+            cell[b] = 0
+            break
+
         else if cell[b] isnt 0 then break
+
     cell
 
   if direction in ["right", "down"]
@@ -79,12 +95,23 @@ mergeCells = (cell, direction) ->
 
 collapseCells = (cell, direction) ->
   cell = cell.filter (x) -> x isnt 0
+  # bombCell = cell.filter(x) -> x is "x"
 
   while cell.length < 4
     if direction in ["right", "down"]
       cell.unshift 0
     else if direction in ["left", "up"]
       cell.push 0
+
+
+
+#while cell includes "x"
+# if direction in ["right", "down"]
+# cell.unshift 0, 0
+# else if direction in ["left", "up"]
+# cell.push 0, 0
+
+
 
   cell
 
@@ -117,19 +144,12 @@ isGameOver = (board) ->
 showBoard = (board) ->
   for row in [0..3]
     for column in [0..3]
-      switch board[row][column]
-        when 0 then $(".r#{row}.c#{column} > div").html("").css("background", "#797980") #background color
-        when 2 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#333366") #dark blue
-        when 4 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#663333") #dark red
-        when 8 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#336633") #dark green
-        when 16 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#B0700E") #orange
-        when 32 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#d2ea13") #yellow
-        when 64 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#64bbd4") #light blue
-        when 128 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#ea50d4") #pink
-        when 256 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#f21b10") #red
-        when 512 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#54565c") #gray
-        when 1024 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#000000") #black
-        when 2048 then $(".r#{row}.c#{column} > div").html(board[row][column]).css("background", "#ffffff") #white
+      if board[row][column] == 0
+        $(".r#{row}.c#{column} > div").html("").css("background", "#797980") #background color
+      else if board[row][column] == 'x'
+        $(".r#{row}.c#{column} > div").html('<img src="/img/bomb.jpeg" class="bomb-pic">')
+      else
+        $(".r#{row}.c#{column} > div").html(board[row][column])
 
 
 printArray = (array) ->
@@ -137,7 +157,6 @@ printArray = (array) ->
   for row in array
     console.log row
   console.log "-- End --"
-
 
 
 $ ->
@@ -170,8 +189,6 @@ $ ->
       #check the move validity,
       # by comparing the original and new board
 
-      printArray newBoard
-
       if moveIsValid(@board, newBoard)
         console.log "valid"
         @board = newBoard
@@ -181,6 +198,8 @@ $ ->
 
         #show board
         showBoard(@board)
+
+        printArray newBoard
 
          #check whether gameover
         if isGameOver(@board)

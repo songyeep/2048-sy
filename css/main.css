@@ -75,12 +75,15 @@ p {
   width: 21.18644%;
   height: 21.18644%;
 
-
-
 }
 
 .cell div {
   margin-top: 25px;
+}
+
+.bomb-pic {
+  height: 30px;
+  weight: 30px;
 }
 
 
