@@ -110,17 +110,6 @@ collapseCells = (cell, direction) ->
       cell.unshift 0
     else if direction in ["left", "up"]
       cell.push 0
-
-
-
-#while cell includes "x"
-# if direction in ["right", "down"]
-# cell.unshift 0, 0
-# else if direction in ["left", "up"]
-# cell.push 0, 0
-
-
-
   cell
 
 
@@ -214,7 +203,7 @@ $ ->
 
          #check whether gameover
         if isGameOver(@board)
-          alert "Game over, dude"
+          $('#myModal').modal("show")
       else
         console.log "invalid"
 
