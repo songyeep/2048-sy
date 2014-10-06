@@ -70,23 +70,21 @@ mergeCells = (cell, direction) ->
           if cell[b] > 0
             cell[a] = 0
             cell[b] = 0
-            $(".bomb_audio").trigger("play");
+            $(".bomb_audio").trigger("play")
 
             break
 
           else if cell[a] == cell[b] == "x"
             cell[a] = 0
             cell[b] = 0
-            $(".bomb_audio").trigger("play");
-
+            $(".bomb_audio").trigger("play")
             break
 
         else if cell[b] == "x"
           if cell[a] > 0
             cell[a] = 0
             cell[b] = 0
-            $(".bomb_audio").trigger("play");
-
+            $(".bomb_audio").trigger("play")
             break
 
         else if cell[b] isnt 0 then break
@@ -149,6 +147,8 @@ showBoard = (board) ->
         $(".r#{row}.c#{column} > div").html(board[row][column])
 
 
+
+
 printArray = (array) ->
   console.log "-- Start -- "
   for row in array
@@ -162,7 +162,6 @@ $ ->
   @board = buildBoard()
   generateTile(@board)
   generateTile(@board)
-
   printArray(@board)
   showBoard(@board)
 
@@ -201,9 +200,12 @@ $ ->
 
         printArray newBoard
 
+
+
          #check whether gameover
         if isGameOver(@board)
           $('#myModal').modal("show")
+
       else
         console.log "invalid"
 

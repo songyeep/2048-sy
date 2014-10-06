@@ -11,6 +11,15 @@
 
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="container">
   <div class="h1">
     <h1>2048</h1>
@@ -21,6 +30,7 @@
     <p class="instructions">Join the numbers to reach the 2048 tile. This is a customized game with the "bomb" dynamic.</p>
    <!--  <a class="btn btn-warning" id="originalGame" a href="http://gabrielecirulli.github.io/2048/">Original Game</a> -->
     <button type="button" class="btn btn-success" id="startNewGame">New Game</button>
+
 
   </div>
 
@@ -50,10 +60,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">That was your last move.</h4>
+          <h4 class="modal-title">That was your last move. Game over, dude.</h4>
         </div>
         <div class="modal-body">
-          <p>Game over, dude.</p>
+          <img src="/img/FGBatman4.gif">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -61,6 +71,9 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
+  <br>
+  <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
 
 </div>
 
